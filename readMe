@@ -8,3 +8,8 @@ Isi NavBar :
 Isi Profile :
 - akun saat ini
 - tombol logout
+
+bang, gimana kalo yg jadi index itu loginnya? soalnya kan yg pertama kali itu pasti login baru masuk ke dashboard. dan index yg sebelumnya jadi dashoboard.
+index->dashboard
+login->index
+gitu
