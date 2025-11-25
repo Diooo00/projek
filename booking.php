@@ -189,6 +189,42 @@ if ($namaUser) {
     </div>
 </section>
 
+<!-- USER MENU MODAL -->
+<div class="user-modal" id="userModal">
+    <div class="user-modal-content">
+        <h3>User Menu</h3>
+
+        <a href="profile.php" class="user-btn"><i class="bi bi-person"></i> Profile</a>
+        <a href="logout.php" class="user-btn"><i class="bi bi-box-arrow-right"></i> Logout</a>
+
+        <button class="btn-close-user" id="closeUserModal">Tutup</button>
+    </div>
+</div>
+
+<script>
+    const userBtn = document.querySelector(".profile-btn");
+    const userModal = document.getElementById("userModal");
+    const closeUserModal = document.getElementById("closeUserModal");
+
+    // buka modal
+    userBtn.addEventListener("click", () => {
+        userModal.style.display = "flex";
+    });
+
+    // tutup modal
+    closeUserModal.addEventListener("click", () => {
+        userModal.style.display = "none";
+    });
+
+    // klik luar modal → tutup
+    window.addEventListener("click", (e) => {
+        if (e.target === userModal) {
+            userModal.style.display = "none";
+        }
+    });
+</script>
+
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 </body>
