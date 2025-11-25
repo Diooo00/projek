@@ -16,7 +16,7 @@ body {
 }
 
 /* ============================================
-   HEADER
+   HEADER / NAVBAR
 ============================================ */
 .header {
     background: #000;
@@ -39,8 +39,12 @@ body {
     color: #ceaf7f;
 }
 
+.nav {
+    display: flex;
+    gap: 18px;
+}
+
 .nav a {
-    margin: 0 14px;
     color: #fff;
     text-decoration: none;
     font-weight: 300;
@@ -52,16 +56,18 @@ body {
 }
 
 .profile-box {
+    position: relative;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
 }
 
 .username {
+    color: white;
     font-size: 15px;
-    color: #fff;
 }
 
+/* PROFILE BUTTON */
 .profile-btn {
     font-size: 26px;
     padding: 8px 12px;
@@ -78,8 +84,81 @@ body {
     color: #000;
 }
 
+/* PROFILE DROPDOWN */
+.profile-dropdown {
+    position: absolute;
+    top: 55px; /* muncul di bawah tombol */
+    right: 0;
+    width: 200px;
+
+    background: #111;
+    border: 1px solid #ceaf7f33;
+    border-radius: 12px;
+    padding: 10px 0;
+
+    display: none;
+    flex-direction: column;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+    animation: dropdownFade 0.25s ease-out;
+    z-index: 999;
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-dropdown a {
+    padding: 12px 18px;
+    color: #fff;
+    font-size: 15px;
+    text-decoration: none;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.profile-dropdown a:hover {
+    background: #ceaf7f22;
+}
+
+/* MOBILE NAV */
+@media(max-width: 860px) {
+    .username {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav {
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        flex-direction: column;
+        background: #000;
+        padding: 20px;
+        gap: 12px;
+        border-radius: 12px;
+        border: 1px solid #ceaf7f33;
+        display: none;
+        z-index: 800;
+    }
+
+    .nav.nav-open {
+        display: flex;
+    }
+}
+
 /* ============================================
-   HERO SECTION (SPLIT LAYOUT FULL)
+   HERO SECTION
 ============================================ */
 .hero {
     min-height: 100vh;
@@ -87,7 +166,6 @@ body {
     display: flex;
     align-items: stretch;
     padding: 0;
-    margin: 0;
 }
 
 .hero-left {
@@ -96,7 +174,6 @@ body {
     align-items: center;
     justify-content: center;
     padding: 100px 60px 60px;
-    background: #000;
 }
 
 .hero-content {
@@ -108,20 +185,16 @@ body {
     font-weight: 700;
     margin-bottom: 20px;
     color: #ceaf7f;
-    line-height: 1.2;
 }
 
 .hero-left p {
     font-size: 1.3rem;
     margin-bottom: 30px;
     color: #ccc;
-    opacity: 0.9;
 }
 
 .hero-right {
     flex: 1;
-    display: flex;
-    position: relative;
     overflow: hidden;
 }
 
@@ -129,42 +202,102 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
 }
 
+/* GOLD BUTTON */
 .btn-gold {
     display: inline-block;
-    margin-top: 20px;
     padding: 12px 30px;
     background: #ceaf7f;
     color: #000;
-    border-radius: 6px;
     font-weight: 600;
+    border-radius: 6px;
     text-decoration: none;
     transition: 0.3s;
 }
 
 .btn-gold:hover {
-    filter: brightness(0.8);
+    filter: brightness(0.85);
     transform: translateY(-2px);
 }
 
 /* ============================================
-   UNIVERSAL SECTION (UNTUK SEMUA BAGIAN)
+   CUSTOMER REVIEWS (HORIZONTAL SCROLL)
+============================================ */
+.reviews {
+    padding: 80px 0;
+}
+
+.reviews-wrapper {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+
+    /* biar scroll lebih halus */
+    scroll-behavior: smooth;
+
+    /* sembunyikan scrollbar di browser modern */
+    scrollbar-width: none;
+}
+.reviews-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+/* CARD STYLE */
+.review-card {
+    flex: 0 0 280px; /* ukuran card fix */
+    background: #111;
+    border: 1px solid #ceaf7f33;
+    border-radius: 12px;
+    padding: 15px;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.review-card:hover {
+    transform: translateY(-5px);
+    border-color: #ceaf7f;
+}
+
+/* FOTO DALAM CARD */
+.review-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 15px;
+}
+
+/* TEKS CARD */
+.review-card h3 {
+    font-size: 18px;
+    color: #ceaf7f;
+    margin-bottom: 10px;
+}
+
+.review-card p {
+    color: #ccc;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+
+/* ============================================
+   UNIVERSAL SECTION
 ============================================ */
 .section {
-    position: relative;
     padding: 80px 0;
     min-height: 70vh;
-    display: flex;
-    align-items: center;
+    position: relative;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .section::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, 0.72);
+    background: rgba(0,0,0,.7);
     z-index: 1;
 }
 
@@ -173,51 +306,20 @@ body {
     z-index: 2;
 }
 
-/* Remove background untuk section-standard */
-.about,
-.services,
-.booking,
-.contact {
-    background: transparent !important;
-}
-
-/* Smooth scrolling */
 html {
     scroll-behavior: smooth;
 }
 
-/* Fade in animation */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.section {
-    animation: fadeInUp 0.8s ease-out;
-}
-
-/* Untuk elemen yang baru muncul saat scroll */
-.section.fade-in {
-    opacity: 0;
-    animation: none;
-}
-
-.section.fade-in.visible {
-    animation: fadeInUp 0.8s ease-out forwards;
+    from {opacity: 0; transform: translateY(30px);}
+    to   {opacity: 1; transform: translateY(0);}
 }
 
 /* ============================================
-   SECTION TITLES
+   SECTION TITLE
 ============================================ */
 .section-title {
     font-size: 32px;
-    font-weight: 600;
     color: #ceaf7f;
     text-align: center;
     margin-bottom: 40px;
@@ -228,13 +330,11 @@ html {
 ============================================ */
 .about .text {
     text-align: center;
-    line-height: 1.8;
-    margin-top: 20px;
-    opacity: 0.9;
-    font-size: 18px;
     max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: auto;
+    font-size: 18px;
+    opacity: 0.9;
+    line-height: 1.8;
 }
 
 /* ============================================
@@ -242,16 +342,15 @@ html {
 ============================================ */
 .services .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
     gap: 25px;
-    margin-top: 40px;
 }
 
 .card {
     background: #111;
     padding: 25px;
-    text-align: center;
     border-radius: 10px;
+    text-align: center;
     border: 1px solid #ceaf7f33;
     transition: 0.3s;
 }
@@ -273,22 +372,14 @@ html {
     min-height: 100vh;
 }
 
-.booking .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.booking-subtitle {
-    text-align: center;
-    color: #ccc;
-    margin-bottom: 30px;
-    font-size: 16px;
+.booking-form-section,
+.booking-list-section {
+    width: 100%;
+    max-width: 1200px;
 }
 
 .book-form {
     width: 100%;
-    max-width: 600px;
     display: grid;
     gap: 18px;
 }
@@ -300,95 +391,45 @@ html {
     color: #fff;
     border-radius: 6px;
     border: 1px solid #ceaf7f33;
-    font-family: "Poppins", sans-serif;
 }
 
 .book-form input:focus,
 .book-form select:focus {
-    outline: none;
     border-color: #ceaf7f;
 }
 
-.btn-back {
-    display: inline-block;
-    padding: 12px 30px;
-    background: transparent;
-    color: #ceaf7f;
-    border: 1px solid #ceaf7f;
-    border-radius: 6px;
-    font-weight: 600;
-    text-decoration: none;
-    text-align: center;
-    transition: 0.3s;
+/* TABLE */
+.table-responsive {
+    overflow-x: auto;
+    margin-top: 20px;
 }
 
-.btn-back:hover {
+.booking-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #111;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.booking-table thead {
     background: #ceaf7f;
     color: #000;
+}
+
+.booking-table th,
+.booking-table td {
+    padding: 15px;
+    border-bottom: 1px solid #ceaf7f33;
 }
 
 /* ============================================
    CONTACT
 ============================================ */
-.contact .container {
-    max-width: 1200px;
-}
-
 .contact-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px,1fr));
     gap: 30px;
-    margin-bottom: 60px;
-}
-
-.contact-card {
-    background: #111;
-    padding: 35px 25px;
-    text-align: center;
-    border-radius: 10px;
-    border: 1px solid #ceaf7f33;
-    transition: 0.3s;
-}
-
-.contact-card:hover {
-    border-color: #ceaf7f;
-    transform: translateY(-5px);
-}
-
-.contact-card i {
-    font-size: 48px;
-    color: #ceaf7f;
-    margin-bottom: 20px;
-}
-
-.contact-card h3 {
-    font-size: 22px;
-    color: #ceaf7f;
-    margin-bottom: 15px;
-    font-weight: 600;
-}
-
-.contact-card p {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #ccc;
-    margin: 0;
-}
-
-.map-container {
-    margin-top: 40px;
-}
-
-.map-title {
-    font-size: 24px;
-    color: #ceaf7f;
-    text-align: center;
-    margin-bottom: 25px;
-    font-weight: 600;
-}
-
-.map-container iframe {
-    box-shadow: 0 10px 40px rgba(206, 175, 127, 0.3);
 }
 
 /* ============================================
@@ -404,33 +445,132 @@ html {
 /* ============================================
    RESPONSIVE
 ============================================ */
-@media (max-width: 768px) {
-    .hero {
-        flex-direction: column;
+@media(max-width: 768px) {
+    .hero {flex-direction: column;}
+
+    .hero-left {text-align: center; padding: 80px 30px;}
+
+    .nav {display: none;}
+
+    .booking-table th,
+    .booking-table td {
+        padding: 10px 8px;
     }
-    
-    .hero-left {
-        padding: 100px 30px 50px;
-        text-align: center;
-    }
-    
-    .hero-left h1 {
-        font-size: 2.5rem;
-    }
-    
-    .hero-left p {
-        font-size: 1.1rem;
-    }
-    
-    .hero-right {
-        min-height: 50vh;
-    }
-    
-    .nav {
-        display: none;
-    }
-    
-    .section {
-        padding: 80px 0;
-    }
+}
+
+
+/* modal background */
+.review-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* modal card */
+.review-modal-content {
+    background: #111;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 450px;
+    border: 1px solid #ceaf7f55;
+}
+
+.review-modal-content h2 {
+    color: #ceaf7f;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.review-modal-content label {
+    margin-top: 12px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+.review-modal-content select,
+.review-modal-content input,
+.review-modal-content textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    background: #000;
+    border: 1px solid #ceaf7f44;
+    color: #fff;
+    border-radius: 6px;
+}
+
+.btn-close {
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    background: transparent;
+    border: 1px solid #ceaf7f;
+    color: #ceaf7f;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* =============================================
+   USER PROFILE MODAL
+============================================== */
+.user-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: none;         /* default hidden */
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+.user-modal-content {
+    background: #111;
+    padding: 25px 20px;
+    width: 90%;
+    max-width: 350px;
+    border-radius: 12px;
+    border: 1px solid #ceaf7f55;
+    animation: fadeInUp 0.25s ease-out;
+    text-align: center;
+}
+
+.user-modal-content h3 {
+    color: #ceaf7f;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.user-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #000;
+    border: 1px solid #ceaf7f55;
+    padding: 12px;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 10px;
+    font-size: 16px;
+    transition: 0.25s;
+}
+
+.user-btn:hover {
+    background: #ceaf7f22;
+}
+
+.btn-close-user {
+    width: 100%;
+    margin-top: 10px;
+    background: transparent;
+    color: #ceaf7f;
+    border: 1px solid #ceaf7f;
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
 }

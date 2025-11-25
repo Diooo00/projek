@@ -1,9 +1,43 @@
 <?php
 session_start();
+
+if(!isset($_SESSION["user"])) {
+    header("Location: login.php");
+    exit();
+}
+
 require_once(__DIR__ . "/koneksi.php");
 
 $namaUser = $_SESSION['user']['nama'] ?? null;
 $initial = $namaUser ? strtoupper(mb_substr($namaUser, 0, 1)) : 'U';
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["add_review"])) {
+
+    $service = $_POST["service"];
+    $review_text = $_POST["review_text"];
+    $user_id = $_SESSION["user"]["id"];
+
+    // Upload foto
+    $fotoName = $_FILES["foto"]["name"];
+    $fotoTmp = $_FILES["foto"]["tmp_name"];
+    $targetPath = "uploads_review/" . time() . "_" . $fotoName;
+
+    move_uploaded_file($fotoTmp, $targetPath);
+
+    $sql = "INSERT INTO reviews (user_id, service, foto, ulasan) VALUES (?, ?, ?, ?)";
+    $stmt = $connection->prepare($sql);
+    $stmt->bind_param("isss", $user_id, $service, $targetPath, $review_text);
+    $stmt->execute();
+
+    echo "<script>alert('Ulasan berhasil ditambahkan!'); window.location.href='index.php#reviews';</script>";
+}
+
+$reviews = [];
+$result = $connection->query("SELECT * FROM reviews ORDER BY id DESC");
+while ($row = $result->fetch_assoc()) {
+    $reviews[] = $row;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +66,7 @@ $initial = $namaUser ? strtoupper(mb_substr($namaUser, 0, 1)) : 'U';
             </nav>
 
             <div class="profile-box">
-                <span class="username">Hallo, <?= $namaUser ?? 'User123' ?></span>
+                <span class="username"><?= $namaUser ?? 'User123' ?></span>
                 <button class="profile-btn"><i class="bi bi-person-circle"></i></button>
             </div>
         </div>
@@ -57,6 +91,35 @@ $initial = $namaUser ? strtoupper(mb_substr($namaUser, 0, 1)) : 'U';
             <p class="text">Barbro adalah barbershop bergaya modern dengan sentuhan klasik yang didirikan dengan visi menghadirkan pengalaman grooming premium di setiap kunjungan. Kami memadukan teknik potongan rambut profesional dengan pelayanan yang personal dan ramah, menciptakan suasana yang nyaman bagi setiap pelanggan. Dengan tim barber berpengalaman dan terlatih, kami mengutamakan presisi dalam setiap guntingan, kenyamanan selama proses perawatan, serta estetika maskulin yang elegan dengan perpaduan warna hitam-putih dan aksen gold yang mencerminkan kemewahan. Di Barbro, kami tidak hanya memberikan potongan rambut, tetapi juga pengalaman grooming yang membuat Anda tampil percaya diri dan stylish setiap hari.</p>
         </div>
     </section>
+
+    <section id="reviews" class="section reviews">
+        <div class="container">
+            <h2 class="section-title">Customer Reviews</h2>
+
+            <div class="reviews-wrapper">
+                <?php if (count($reviews) > 0): ?>
+                    <?php foreach ($reviews as $rev): ?>
+                    <div class="review-card">
+                        <img src="<?= $rev['foto'] ?>" alt="Review">
+                        <h3><?= $rev['service'] ?></h3>
+                        <p>“<?= $rev['ulasan'] ?>”</p>
+                    </div>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <p style="color:#ccc; width:100%; text-align:center;">Belum ada ulasan.</p>
+                <?php endif; ?>
+            </div>
+
+            <!-- TOMBOL TAMBAH ULASAN -->
+            <div style="text-align:center; margin-top:40px;">
+                <button class="btn-gold" id="openReviewForm" style="cursor:pointer;">
+                    Tambahkan Ulasan
+                </button>
+            </div>
+        </div>
+    </section>
+
+
 
     <section id="services" class="section services">
         <div class="container">
@@ -125,6 +188,80 @@ $initial = $namaUser ? strtoupper(mb_substr($namaUser, 0, 1)) : 'U';
             <p>© 2025 Barbro Barbershop. All rights reserved.</p>
         </div>
     </footer>
+
+    <div class="review-modal" id="reviewModal">
+        <div class="review-modal-content">
+            <h2>Tambah Ulasan</h2>
+
+            <form method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="add_review" value="1">
+
+                <label>Jenis Pelayanan</label>
+                <select name="service" required>
+                    <option value="Haircut">Haircut</option>
+                    <option value="Beard Trim">Beard Trim</option>
+                    <option value="Haircut + Beard">Haircut + Beard</option>
+                </select>
+
+                <label>Foto Hasil</label>
+                <input type="file" name="foto" accept="image/*" required>
+
+                <label>Ulasan</label>
+                <textarea name="review_text" rows="4" required></textarea>
+
+                <button type="submit" class="btn-gold" style="width:100%;">Kirim Ulasan</button>
+            </form>
+
+            <button class="btn-close" id="closeReviewForm">Tutup</button>
+        </div>
+    </div>
+
+    <!-- USER MENU MODAL -->
+    <div class="user-modal" id="userModal">
+        <div class="user-modal-content">
+            <h3>User Menu</h3>
+
+            <a href="profile.php" class="user-btn"><i class="bi bi-person"></i> Profile</a>
+            <a href="logout.php" class="user-btn"><i class="bi bi-box-arrow-right"></i> Logout</a>
+
+            <button class="btn-close-user" id="closeUserModal">Tutup</button>
+        </div>
+    </div>
+
+
+    <script>
+        document.getElementById("openReviewForm").onclick = function(){
+            document.getElementById("reviewModal").style.display = "flex";
+        }
+        document.getElementById("closeReviewForm").onclick = function(){
+            document.getElementById("reviewModal").style.display = "none";
+        }
+    </script>
+
+    <script>
+        const userBtn = document.querySelector(".profile-btn");
+        const userModal = document.getElementById("userModal");
+        const closeUserModal = document.getElementById("closeUserModal");
+
+        // buka modal
+        userBtn.addEventListener("click", () => {
+            userModal.style.display = "flex";
+        });
+
+        // tutup modal
+        closeUserModal.addEventListener("click", () => {
+            userModal.style.display = "none";
+        });
+
+        // klik luar modal → tutup
+        window.addEventListener("click", (e) => {
+            if (e.target === userModal) {
+                userModal.style.display = "none";
+            }
+        });
+    </script>
+
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     
