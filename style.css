@@ -1,0 +1,436 @@
+/* ============================================
+   GLOBAL
+============================================ */
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: url('bg.webp') center/cover no-repeat fixed;
+    color: #fff;
+}
+
+/* Container standar */
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: auto;
+}
+
+/* ============================================
+   HEADER
+============================================ */
+.header {
+    background: #000;
+    padding: 18px 0;
+    border-bottom: 1px solid #ceaf7f;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ceaf7f;
+}
+
+.nav a {
+    margin: 0 14px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 300;
+    transition: 0.3s;
+}
+
+.nav a:hover {
+    color: #ceaf7f;
+}
+
+.profile-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.username {
+    font-size: 15px;
+    color: #fff;
+}
+
+.profile-btn {
+    font-size: 26px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid #ceaf7f;
+    background: transparent;
+    color: #ceaf7f;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.profile-btn:hover {
+    background: #ceaf7f;
+    color: #000;
+}
+
+/* ============================================
+   HERO SECTION (SPLIT LAYOUT FULL)
+============================================ */
+.hero {
+    min-height: 100vh;
+    background: #000;
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    margin: 0;
+}
+
+.hero-left {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 60px 60px;
+    background: #000;
+}
+
+.hero-content {
+    max-width: 600px;
+}
+
+.hero-left h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #ceaf7f;
+    line-height: 1.2;
+}
+
+.hero-left p {
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+    color: #ccc;
+    opacity: 0.9;
+}
+
+.hero-right {
+    flex: 1;
+    display: flex;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-right img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.btn-gold {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 30px;
+    background: #ceaf7f;
+    color: #000;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-gold:hover {
+    filter: brightness(0.8);
+    transform: translateY(-2px);
+}
+
+/* ============================================
+   UNIVERSAL SECTION (UNTUK SEMUA BAGIAN)
+============================================ */
+.section {
+    position: relative;
+    padding: 80px 0;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+}
+
+.section::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    z-index: 1;
+}
+
+.section > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Remove background untuk section-standard */
+.about,
+.services,
+.booking,
+.contact {
+    background: transparent !important;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.section {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Untuk elemen yang baru muncul saat scroll */
+.section.fade-in {
+    opacity: 0;
+    animation: none;
+}
+
+.section.fade-in.visible {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+
+/* ============================================
+   SECTION TITLES
+============================================ */
+.section-title {
+    font-size: 32px;
+    font-weight: 600;
+    color: #ceaf7f;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* ============================================
+   ABOUT
+============================================ */
+.about .text {
+    text-align: center;
+    line-height: 1.8;
+    margin-top: 20px;
+    opacity: 0.9;
+    font-size: 18px;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ============================================
+   SERVICES GRID
+============================================ */
+.services .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.card {
+    background: #111;
+    padding: 25px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid #ceaf7f33;
+    transition: 0.3s;
+}
+
+.card:hover {
+    border-color: #ceaf7f;
+    transform: translateY(-5px);
+}
+
+.card i {
+    font-size: 42px;
+    color: #ceaf7f;
+}
+
+/* ============================================
+   BOOKING
+============================================ */
+.booking {
+    min-height: 100vh;
+}
+
+.booking .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.booking-subtitle {
+    text-align: center;
+    color: #ccc;
+    margin-bottom: 30px;
+    font-size: 16px;
+}
+
+.book-form {
+    width: 100%;
+    max-width: 600px;
+    display: grid;
+    gap: 18px;
+}
+
+.book-form input,
+.book-form select {
+    padding: 12px;
+    background: #000;
+    color: #fff;
+    border-radius: 6px;
+    border: 1px solid #ceaf7f33;
+    font-family: "Poppins", sans-serif;
+}
+
+.book-form input:focus,
+.book-form select:focus {
+    outline: none;
+    border-color: #ceaf7f;
+}
+
+.btn-back {
+    display: inline-block;
+    padding: 12px 30px;
+    background: transparent;
+    color: #ceaf7f;
+    border: 1px solid #ceaf7f;
+    border-radius: 6px;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.3s;
+}
+
+.btn-back:hover {
+    background: #ceaf7f;
+    color: #000;
+}
+
+/* ============================================
+   CONTACT
+============================================ */
+.contact .container {
+    max-width: 1200px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+}
+
+.contact-card {
+    background: #111;
+    padding: 35px 25px;
+    text-align: center;
+    border-radius: 10px;
+    border: 1px solid #ceaf7f33;
+    transition: 0.3s;
+}
+
+.contact-card:hover {
+    border-color: #ceaf7f;
+    transform: translateY(-5px);
+}
+
+.contact-card i {
+    font-size: 48px;
+    color: #ceaf7f;
+    margin-bottom: 20px;
+}
+
+.contact-card h3 {
+    font-size: 22px;
+    color: #ceaf7f;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.contact-card p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ccc;
+    margin: 0;
+}
+
+.map-container {
+    margin-top: 40px;
+}
+
+.map-title {
+    font-size: 24px;
+    color: #ceaf7f;
+    text-align: center;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.map-container iframe {
+    box-shadow: 0 10px 40px rgba(206, 175, 127, 0.3);
+}
+
+/* ============================================
+   FOOTER
+============================================ */
+.footer {
+    text-align: center;
+    padding: 25px;
+    border-top: 1px solid #ceaf7f55;
+    margin-top: 40px;
+}
+
+/* ============================================
+   RESPONSIVE
+============================================ */
+@media (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+    }
+    
+    .hero-left {
+        padding: 100px 30px 50px;
+        text-align: center;
+    }
+    
+    .hero-left h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero-left p {
+        font-size: 1.1rem;
+    }
+    
+    .hero-right {
+        min-height: 50vh;
+    }
+    
+    .nav {
+        display: none;
+    }
+    
+    .section {
+        padding: 80px 0;
+    }
+}
