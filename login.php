@@ -51,44 +51,45 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>Login - Barbro</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-light">
+<body>
 
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="card shadow" style="width: 25rem;">
-            <div class="card-body">
+        <div class="profile-card">
+            <div class="card-body p-4">
 
-                <h3 class="text-center mb-4">Login</h3>
+                <h3 class="text-center mb-4" style="color:#ceaf7f;">Login</h3>
 
                 <?php if (!empty($error)): ?>
-                    <div class="alert alert-danger text-center">
+                    <div class="alert alert-danger text-center" style="background:#330000; border-color:#ceaf7f44; color:#fff;">
                         <?= $error ?>
                     </div>
                 <?php endif; ?>
 
                 <form method="POST">
 
-                    <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input name="email" type="email" class="form-control" required>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input name="email" type="email" value="" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input name="password" type="password" class="form-control" required>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input name="password" type="password" value="" required>
                     </div>
 
-                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                    <div class="btn-row">
+                        <button class="btn-apply w-100" type="submit">Login</button>
+                    </div>
                 </form>
 
                 <p class="text-center mt-3">
-                    Belum punya akun?
-                    <a href="register.php">Register</a>
+                    Belum punya akun? <a href="register.php" style="color:#ceaf7f;">Register</a>
                 </p>
 
             </div>

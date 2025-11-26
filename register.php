@@ -42,55 +42,59 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Register</title>
+    <title>Register - Barbro</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="bg-light">
+<body>
 
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="card shadow" style="width: 28rem;">
-            <div class="card-body">
+        <div class="profile-card" style="max-width: 400px;">
+            <div class="card-body p-4">
 
-                <h3 class="text-center mb-4">Register</h3>
+                <h3 class="text-center mb-4" style="color:#ceaf7f;">Register</h3>
 
                 <?php if (!empty($error)): ?>
-                    <div class="alert alert-danger text-center"><?= $error ?></div>
+                    <div class="alert alert-danger text-center" style="background:#330000; border-color:#ceaf7f44; color:#fff;">
+                        <?= $error ?>
+                    </div>
                 <?php endif; ?>
 
                 <form method="POST">
 
-                    <div class="mb-3">
-                        <label class="form-label">Nama Lengkap</label>
-                        <input type="text" name="nama" class="form-control" required>
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" name="nama" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Email</label>
-                        <input type="email" name="email" class="form-control" required>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Jenis Kelamin</label>
-                        <select name="jenis_kelamin" class="form-select" required>
+                    <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <select name="jenis_kelamin" required>
                             <option value="">-- Pilih --</option>
                             <option value="Laki-laki">Laki-laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
                     </div>
 
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" name="password" class="form-control" required>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" required>
                     </div>
 
-                    <button class="btn btn-primary w-100">Register</button>
+                    <div class="btn-row">
+                        <button class="btn-apply w-100" type="submit">Register</button>
+                    </div>
                 </form>
 
                 <p class="text-center mt-3">
-                    Sudah punya akun?
-                    <a href="login.php">Login</a>
+                    Sudah punya akun? <a href="login.php" style="color:#ceaf7f;">Login</a>
                 </p>
 
             </div>
