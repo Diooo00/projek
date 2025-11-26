@@ -15,7 +15,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // CARI USER BERDASARKAN EMAIL
     $sql = "SELECT * FROM user WHERE email = ?";
     $stmt = $connection->prepare($sql);
     $stmt->bind_param("s", $email);
@@ -27,10 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $row = $result->fetch_assoc();
 
-        // Verifikasi password
         if (password_verify($password, $row["password"])) {
-
-            // Simpan session
             $_SESSION["user"] = [
                 "id" => $row["id"],
                 "nama" => $row["nama"],
@@ -45,6 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $error = "Email atau password salah!";
 }
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -60,40 +57,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
 
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="profile-card">
-            <div class="card-body p-4">
 
-                <h3 class="text-center mb-4" style="color:#ceaf7f;">Login</h3>
+        <div class="profile-card" style="max-width: 480px;">
 
-                <?php if (!empty($error)): ?>
-                    <div class="alert alert-danger text-center" style="background:#330000; border-color:#ceaf7f44; color:#fff;">
-                        <?= $error ?>
-                    </div>
-                <?php endif; ?>
+            <h3 class="text-center mb-4" style="color:#ceaf7f;">Login</h3>
 
-                <form method="POST">
+            <?php if (!empty($error)): ?>
+                <div class="alert alert-danger text-center" style="background:#330000; border-color:#ceaf7f55; color:white;">
+                    <?= $error ?>
+                </div>
+            <?php endif; ?>
 
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input name="email" type="email" value="" required>
-                    </div>
+            <form method="POST">
 
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input name="password" type="password" value="" required>
-                    </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" required>
+                </div>
 
-                    <div class="btn-row">
-                        <button class="btn-apply w-100" type="submit">Login</button>
-                    </div>
-                </form>
+                <div class="mb-4">
+                    <label class="form-label">Password</label>
+                    <input name="password" type="password" class="form-control" required>
+                </div>
 
-                <p class="text-center mt-3">
-                    Belum punya akun? <a href="register.php" style="color:#ceaf7f;">Register</a>
-                </p>
+                <button class="btn-apply w-100" type="submit">Login</button>
 
-            </div>
+            </form>
+
+            <p class="text-center mt-3">
+                Belum punya akun? <a href="register.php" style="color:#ceaf7f;">Register</a>
+            </p>
+
         </div>
+
     </div>
 
 </body>

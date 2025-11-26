@@ -66,7 +66,7 @@ while ($row = $result->fetch_assoc()) {
             </nav>
 
             <div class="profile-box">
-                <span class="username"><?= $namaUser ?? 'User123' ?></span>
+                <span class="username"><?= $namaUser ?></span>
                 <button class="profile-btn"><i class="bi bi-person-circle"></i></button>
             </div>
         </div>

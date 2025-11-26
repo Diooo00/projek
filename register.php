@@ -32,10 +32,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         $error = "Registrasi gagal! Email atau nama mungkin sudah digunakan.";
     }
-
-    $stmt->close();
 }
 ?>
+
 <!doctype html>
 <html lang="en">
 
@@ -51,54 +50,53 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
 
     <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
-        <div class="profile-card" style="max-width: 400px;">
-            <div class="card-body p-4">
 
-                <h3 class="text-center mb-4" style="color:#ceaf7f;">Register</h3>
+        <div class="profile-card" style="max-width: 520px;">
 
-                <?php if (!empty($error)): ?>
-                    <div class="alert alert-danger text-center" style="background:#330000; border-color:#ceaf7f44; color:#fff;">
-                        <?= $error ?>
-                    </div>
-                <?php endif; ?>
+            <h3 class="text-center mb-4" style="color:#ceaf7f;">Register</h3>
 
-                <form method="POST">
+            <?php if (!empty($error)): ?>
+                <div class="alert alert-danger text-center" style="background:#330000; border-color:#ceaf7f55; color:white;">
+                    <?= $error ?>
+                </div>
+            <?php endif; ?>
 
-                    <div class="form-group">
-                        <label>Nama Lengkap</label>
-                        <input type="text" name="nama" required>
-                    </div>
+            <form method="POST">
 
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" name="email" required>
-                    </div>
+                <div class="mb-3">
+                    <label class="form-label">Nama Lengkap</label>
+                    <input name="nama" type="text" class="form-control" required>
+                </div>
 
-                    <div class="form-group">
-                        <label>Jenis Kelamin</label>
-                        <select name="jenis_kelamin" required>
-                            <option value="">-- Pilih --</option>
-                            <option value="Laki-laki">Laki-laki</option>
-                            <option value="Perempuan">Perempuan</option>
-                        </select>
-                    </div>
+                <div class="mb-3">
+                    <label class="form-label">Jenis Kelamin</label>
+                    <select name="jenis_kelamin" class="form-select" required>
+                        <option value="">-- Pilih --</option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                </select>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input name="email" type="email" class="form-control" required>
+                </div>
 
-                    <div class="form-group">
-                        <label>Password</label>
-                        <input type="password" name="password" required>
-                    </div>
+                <div class="mb-4">
+                    <label class="form-label">Password</label>
+                    <input name="password" type="password" class="form-control" required>
+                </div>
 
-                    <div class="btn-row">
-                        <button class="btn-apply w-100" type="submit">Register</button>
-                    </div>
-                </form>
+                <button class="btn-apply w-100" type="submit">Register</button>
 
-                <p class="text-center mt-3">
-                    Sudah punya akun? <a href="login.php" style="color:#ceaf7f;">Login</a>
-                </p>
+            </form>
 
-            </div>
+            <p class="text-center mt-3">
+                Sudah punya akun? <a href="login.php" style="color:#ceaf7f;">Login</a>
+            </p>
+
         </div>
+
     </div>
 
 </body>
