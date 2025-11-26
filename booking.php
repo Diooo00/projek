@@ -89,8 +89,8 @@ if ($namaUser) {
             <a href="index.php#home">Home</a>
             <a href="index.php#about">About</a>
             <a href="index.php#services">Services</a>
-            <a href="booking.php">Booking</a>
             <a href="index.php#contact">Contact</a>
+            <a href="booking.php">Booking</a>
         </nav>
 
         <div class="profile-box">

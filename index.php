@@ -61,8 +61,8 @@ while ($row = $result->fetch_assoc()) {
                 <a href="#home">Home</a>
                 <a href="#about">About</a>
                 <a href="#services">Services</a>
-                <a href="booking.php">Booking</a>
                 <a href="#contact">Contact</a>
+                <a href="booking.php">Booking</a>
             </nav>
 
             <div class="profile-box">
